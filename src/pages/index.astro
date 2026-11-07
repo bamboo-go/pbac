@@ -1,0 +1,73 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SquatSimulator from '../components/SquatSimulator';
+import { getCollection } from 'astro:content';
+
+const issues = await getCollection('issues');
+---
+
+<Layout title="Telemetry & Issues">
+  <div class="space-y-8 font-mono">
+    <!-- Value Proposition Banner -->
+    <div class="p-6 bg-gradient-to-r from-zinc-900 to-[#161b22] border border-zinc-800 rounded-xl space-y-2">
+      <div class="text-xs text-emerald-400 font-bold uppercase tracking-wider">// SYSTEM CONCEPT</div>
+      <h1 class="text-xl md:text-2xl font-black text-zinc-100">Physical Body as a Code (PBaC)</h1>
+      <p class="text-xs text-zinc-400 max-w-2xl leading-relaxed">
+        エンジニアのためのオープンソース身体最適化ログ。不調をバグとしてIssue管理し、パッチを適用してリファクタリングする過程を公開・共有します。
+      </p>
+    </div>
+
+    <!-- Telemetry Status Bar -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div class="bg-[#161b22] border border-zinc-800 p-4 rounded-lg">
+        <div class="text-xs text-zinc-500">UPTIME</div>
+        <div class="text-xl font-bold text-zinc-100 mt-1">Day 14,235</div>
+      </div>
+      <div class="bg-[#161b22] border border-zinc-800 p-4 rounded-lg">
+        <div class="text-xs text-zinc-500">OPEN ISSUES</div>
+        <div class="text-xl font-bold text-rose-500 mt-1">{issues.filter(i => i.data.status !== 'resolved').length} Bugs</div>
+      </div>
+      <div class="bg-[#161b22] border border-zinc-800 p-4 rounded-lg">
+        <div class="text-xs text-zinc-500">APPLIED PATCHES</div>
+        <div class="text-xl font-bold text-emerald-400 mt-1">1 Verified</div>
+      </div>
+      <div class="bg-[#161b22] border border-zinc-800 p-4 rounded-lg flex flex-col justify-center">
+        <a href="https://github.com/your-name/pbac" target="_blank" class="text-xs text-center py-1.5 px-3 bg-emerald-600 hover:bg-emerald-500 text-zinc-950 font-bold rounded transition-colors">
+          Use Template ↗
+        </a>
+      </div>
+    </div>
+
+    <!-- Active Issues List -->
+    <div>
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-sm font-bold text-zinc-200 uppercase tracking-wider">// Active Body Issues</h2>
+        <span class="text-xs text-zinc-500">Tracked via Git</span>
+      </div>
+      <div class="border border-zinc-800 rounded-lg divide-y divide-zinc-800 bg-[#161b22]">
+        {issues.map(issue => (
+          <a href={`/issues/${issue.slug}`} class="p-4 block hover:bg-zinc-800/40 transition-colors">
+            <div class="flex items-center justify-between gap-4">
+              <div class="flex items-center gap-3">
+                <span class="text-emerald-400 text-xs font-bold">[{issue.data.id}]</span>
+                <span class="text-sm font-medium text-zinc-200">{issue.data.title}</span>
+              </div>
+              <span class="text-xs px-2 py-0.5 rounded border border-rose-900/60 bg-rose-950/40 text-rose-400 uppercase">
+                {issue.data.severity}
+              </span>
+            </div>
+            <div class="mt-2 text-xs text-zinc-500 flex gap-4">
+              <span>Layer: {issue.data.systemLayer}</span>
+              <span>Target: {issue.data.baselineMetric.target}</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <!-- Biomechanics Simulator Section -->
+    <div>
+      <SquatSimulator client:visible />
+    </div>
+  </div>
+</Layout>

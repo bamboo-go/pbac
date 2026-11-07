@@ -1,0 +1,69 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import HardwarePatchCard from '../../components/HardwarePatchCard.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const issues = await getCollection('issues');
+  return issues.map(issue => ({
+    params: { slug: issue.slug },
+    props: { issue },
+  }));
+}
+
+const { issue } = Astro.props;
+const { Content } = await issue.render();
+---
+
+<Layout title={`${issue.data.id}: ${issue.data.title}`}>
+  <article class="max-w-3xl mx-auto font-mono">
+    <!-- Header -->
+    <div class="border-b border-zinc-800 pb-6 mb-8">
+      <div class="flex items-center gap-2 text-xs text-zinc-500 mb-2">
+        <span>{issue.data.id}</span>
+        <span>/</span>
+        <span class="text-emerald-400">{issue.data.systemLayer}</span>
+      </div>
+      <h1 class="text-2xl font-bold text-zinc-100">{issue.data.title}</h1>
+      
+      <!-- Telemetry Box -->
+      <div class="mt-6 p-4 bg-[#161b22] border border-zinc-800 rounded-lg text-xs space-y-2">
+        <div class="text-zinc-500">// TELEMETRY BENCHMARK</div>
+        <div class="grid grid-cols-3 gap-2 pt-1 text-zinc-300">
+          <div>左足: <span class="font-bold text-zinc-100">{issue.data.baselineMetric.currentLeft}</span></div>
+          <div>右足: <span class="font-bold text-zinc-100">{issue.data.baselineMetric.currentRight}</span></div>
+          <div>合格ライン: <span class="font-bold text-emerald-400">{issue.data.baselineMetric.target}</span></div>
+        </div>
+      </div>
+
+      <div class="mt-4">
+        <a 
+          href="https://github.com/your-name/pbac" 
+          target="_blank" 
+          class="text-xs text-zinc-400 hover:text-emerald-400 transition-colors"
+        >
+          ↗ このIssueを自分のGitHubリポジトリにコピーする
+        </a>
+      </div>
+    </div>
+
+    <!-- Content -->
+    <div class="prose prose-invert prose-zinc max-w-none text-sm leading-relaxed space-y-4">
+      <Content />
+    </div>
+
+    <!-- Monetization Section -->
+    <div class="mt-12 pt-8 border-t border-zinc-800">
+      <h3 class="text-base font-bold text-zinc-100 mb-2">// Verified Hardware Patches</h3>
+      <p class="text-xs text-zinc-400 mb-4">このIssueのデバッグ・解消に実際に効果が確認された外部物理ツール群です。</p>
+      
+      <HardwarePatchCard 
+        name="角度可変式 リジッド・ストレッチボード"
+        category="Biomechanics Patch"
+        effect="足関節背屈可動域を強制固定し、ヒラメ筋短縮を物理リファクタリングするハードウェア。"
+        affiliateUrl="https://example.com/affiliate-link"
+        priceRange="¥3,500 - ¥5,000"
+      />
+    </div>
+  </article>
+</Layout>
