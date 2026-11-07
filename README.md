@@ -26,7 +26,7 @@ PBaC is a personal logging framework, not medical advice. The simulator is a con
 2. Clone your copy and start the site (see below).
 3. Add a bug as a Markdown file in `src/content/issues/`, using `issue-001.md` as a reference. The frontmatter is validated by the schema in `src/content/config.ts`.
 4. Track day-to-day progress on GitHub Issues with the template in `.github/ISSUE_TEMPLATE/`.
-5. Replace the `your-name` GitHub URLs and the `example.com` affiliate link with your own.
+5. Replace the `xyna-bpinelab` GitHub URLs and the `example.com` affiliate link with your own.
 
 ### Getting started
 
@@ -63,7 +63,7 @@ PBaC は個人の記録用フレームワークであり、医学的助言では
 2. 作成したリポジトリをクローンし、サイトを起動します（下記参照）。
 3. `issue-001.md` を参考に、`src/content/issues/` に Markdown ファイルとしてバグを追加します。フロントマターは `src/content/config.ts` のスキーマで検証されます。
 4. 日々の経過は、`.github/ISSUE_TEMPLATE/` のテンプレートを使って GitHub Issues で管理します。
-5. `your-name` を含む GitHub の URL と、`example.com` のアフィリエイトリンクを自分のものに置き換えます。
+5. `xyna-bpinelab` を含む GitHub の URL と、`example.com` のアフィリエイトリンクを自分のものに置き換えます。
 
 ### サイトの立ち上げ
 

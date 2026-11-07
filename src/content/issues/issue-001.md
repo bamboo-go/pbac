@@ -10,7 +10,7 @@ baselineMetric:
   currentLeft: "6.0cm"
   currentRight: "4.5cm"
   target: "10.0cm以上"
-githubIssueUrl: "https://github.com/your-name/pbac/issues/1"
+githubIssueUrl: "https://github.com/xyna-bpinelab/pbac/issues/1"
 tags: ["mobility", "squat", "soleus", "deskwork"]
 ---
 
