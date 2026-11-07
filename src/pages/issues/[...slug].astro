@@ -1,18 +1,18 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import HardwarePatchCard from '../../components/HardwarePatchCard.astro';
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
   const issues = await getCollection('issues');
   return issues.map(issue => ({
-    params: { slug: issue.slug },
+    params: { slug: issue.id },
     props: { issue },
   }));
 }
 
 const { issue } = Astro.props;
-const { Content } = await issue.render();
+const { Content } = await render(issue);
 ---
 
 <Layout title={`${issue.data.id}: ${issue.data.title}`}>

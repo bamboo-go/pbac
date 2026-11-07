@@ -46,7 +46,7 @@ const issues = await getCollection('issues');
       </div>
       <div class="border border-zinc-800 rounded-lg divide-y divide-zinc-800 bg-[#161b22]">
         {issues.map(issue => (
-          <a href={`/issues/${issue.slug}`} class="p-4 block hover:bg-zinc-800/40 transition-colors">
+          <a href={`/issues/${issue.id}`} class="p-4 block hover:bg-zinc-800/40 transition-colors">
             <div class="flex items-center justify-between gap-4">
               <div class="flex items-center gap-3">
                 <span class="text-emerald-400 text-xs font-bold">[{issue.data.id}]</span>
